@@ -19,7 +19,8 @@
 # in the templates via {{ site.myvariable }}.
 
 # Build settings
-url: "https://km719.github.io/queens-archive/"
+baseurl: "/queens-archive"
+url: "https://km719.github.io/"
 
 collections:
   games:
