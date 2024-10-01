@@ -1,0 +1,257 @@
+/* Reset default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* General styles */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #000000; /* Ensure text is completely black */
+    display: flex;
+    justify-content: center;
+}
+
+/* Game container */
+#game-container {
+    width: 488px; /* Match the width of the board */
+    margin-top: 20px;
+}
+
+/* Button styles */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between; /* Distributes space between buttons */
+    margin: 20px 0; /* Adds vertical spacing */
+}
+
+.nav-button {
+    display: inline-block; /* Makes the link act like a button */
+    padding: 10px 20px; /* Adds space inside the button */
+    font-size: 16px; /* Font size */
+    color: white; /* Text color */
+    text-decoration: none; /* Removes underline from links */
+    border-radius: 5px; /* Rounds the corners */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+    background-color: #000000; /* Blue background */
+}
+
+.nav-button:hover {
+    opacity: 0.8; /* Slightly transparent on hover */
+    background-color: #222222; /* Darker blue on hover */
+}
+
+/* Header styles */
+#header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+#timer {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Message styles */
+#message {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+    height: 24px; /* Reserve space even when no message */
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/* Board container */
+#board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Board and cell styles */
+#chessboard {
+    border-collapse: collapse;
+    border: 4px solid #000000; /* Black border */
+}
+
+td {
+    width: calc(488px / var(--board-size)); /* Adjust the width based on the board size */
+    height: calc(488px / var(--board-size)); /* Adjust the height based on the board size */
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #555; /* Thin cell borders */
+    background-color: #ffffff;
+}
+
+td span {
+    font-size: 40px;
+    line-height: 60px;
+    display: block;
+}
+
+/* Region colors */
+td.purple {
+    background-color: #b7a3e2;
+}
+
+td.green {
+    background-color: #b8dea0;
+}
+
+td.gray {
+    background-color: #e0e0e0;
+}
+
+td.red {
+    background-color: #f67858;
+}
+
+td.yellow {
+    background-color: #e8f18b;
+}
+
+td.brown {
+    background-color: #b9b29b;
+}
+
+td.blue {
+    background-color: #99bfff;
+}
+
+td.orange {
+    background-color: #fbc88c;
+}
+
+/* New colors */
+td.teal {
+    background-color: #aad1d8; /* New color 1 */
+}
+
+td.cyan {
+    background-color: #78ede7; /* New color 2 */
+}
+
+td.pink {
+    background-color: #db9ebd; /* New color 3 */
+}
+
+/* Queen styles using Font Awesome */
+.queen::after {
+    content: "\f521"; /* Unicode for Font Awesome crown icon */
+    font-family: 'Font Awesome 6 Free'; /* Font family for Font Awesome */
+    font-weight: 900; /* Necessary for solid icons */
+    color: #000000; /* Ensure black */
+    font-size: 24px; /* Reduced size by approximately 15-20% */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Adjusted 'X' marker styles */
+.x-mark::after {
+    content: '\00D7'; /* Unicode character for multiplication cross '×' */
+    color: #000000; /* Ensure black */
+    font-size: 24px; /* Smaller font size */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the '×' within the cell */
+}
+
+/* Region border styles */
+td::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    pointer-events: none;
+    z-index: 1; /* Ensure region borders appear above cell content */
+}
+
+/* Border classes for region edges */
+.border-top::before {
+    border-top: 4px solid #000000;
+    top: -2px; /* Adjust for border thickness */
+}
+
+.border-right::before {
+    border-right: 4px solid #000000;
+    right: -2px;
+}
+
+.border-bottom::before {
+    border-bottom: 4px solid #000000;
+    bottom: -2px;
+}
+
+.border-left::before {
+    border-left: 4px solid #000000;
+    left: -2px;
+}
+
+/* Flashing effect for conflicting queens */
+@keyframes flashRedColor {
+    0% { color: #000000; }
+    50% { color: red; }
+    100% { color: #000000; }
+}
+
+.queen.flash::after {
+    animation: flashRedColor 1s ease-in-out;
+}
+
+/* Flashing effect for successful completion */
+@keyframes flashGreenColor {
+    0% { color: #000000; }
+    50% { color: #00ff00; }
+    100% { color: #000000; }
+}
+
+.queen.flash-success::after {
+    animation: flashGreenColor 1s ease-in-out;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    #game-container {
+        width: auto;
+        margin: 10px;
+    }
+
+    td {
+        width: calc(100vw / 10); /* Adjust the width based on the viewport width */
+        height: calc(100vw / 10); /* Adjust the height based on the viewport width */
+    }
+
+    .queen::after {
+        font-size: 20px;
+    }
+
+    .x-mark::after {
+        font-size: 18px;
+    }
+
+    #title {
+        font-size: 24px;
+    }
+
+    #timer {
+        font-size: 20px;
+    }
+}

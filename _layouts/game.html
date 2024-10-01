@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Queens Archive {{ page.title }}</title>
+    <!-- Include Font Awesome CSS -->
+    <script src="https://kit.fontawesome.com/2439292d54.js" crossorigin="anonymous"></script>
+    <!-- Include Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="header">
+            <h1 id="title">Queens Archive #{{ page.title }}</h1>
+            <div id="timer">00:00</div>
+        </div>
+        <div id="message"></div>
+        <div id="board-container">
+            <table id="chessboard"></table>
+        </div>
+        <nav>
+            {% assign current_game = page.title | plus: 0 %}
+            {% assign total_games = site.games | size %}
+
+            <div class="nav-buttons">
+                <div>
+                    {% if current_game > 1 %}
+                    <a class="nav-button prev" href="{{ site.baseurl }}/{{ current_game | minus: 1 }}">Previous</a>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if current_game < total_games %} <a class="nav-button next"
+                        href="{{ site.baseurl }}/{{ current_game | plus: 1 }}">Next</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+    </div>
+    {{ content }}
+
+
+</body>
+
+</html>
