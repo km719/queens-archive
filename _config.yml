@@ -20,7 +20,7 @@
 
 # Build settings
 baseurl: "/queens-archive"
-url: "https://km719.github.io/"
+url: "https://km719.github.io/queens-archive"
 
 collections:
   games:
